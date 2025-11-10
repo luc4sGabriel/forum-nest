@@ -46,7 +46,7 @@ export class AuthenticateController {
         })
 
         return {
-            acess_token: acessToken,
+            access_token: acessToken,
         }
     }
 }
