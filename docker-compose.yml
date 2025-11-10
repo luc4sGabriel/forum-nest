@@ -1,0 +1,10 @@
+services:
+  postgres:
+    container_name: nest-project
+    image: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: nest
+      POSTGRES_PASSWORD: nest
+      POSTGRES_DB: nest
