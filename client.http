@@ -1,5 +1,5 @@
 @baseUrl = http://localhost:3333
-@authToken = {{Authenticate.response.body.acess_token}}
+@authToken = {{Authenticate.response.body.access_token}}
 
 # @name Create_Account
 POST {{baseUrl}}/accounts
@@ -30,8 +30,8 @@ Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-  "title": "Nova Pergunta 2",
-  "content": "Counteudo da pergunta 2"
+  "title": "Nova Pergunta 3",
+  "content": "Counteudo da pergunta 3"
 }
 
 ###
