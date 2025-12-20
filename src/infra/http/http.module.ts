@@ -10,6 +10,7 @@ import { AuthenticateStudentUseCase } from "@/domain/forum/application/use-cases
 import { RegisterStudentUseCase } from "@/domain/forum/application/use-cases/register-student";
 import { CryptographyModule } from "../cryptography/cryptography.module";
 
+
 @Module({
     imports: [
         DatabaseModule,
