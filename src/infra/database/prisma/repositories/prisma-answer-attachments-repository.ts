@@ -1,28 +1,33 @@
 import { PaginationParams } from "@/core/repositories/pagination-params";
+import { AnswerAttachmentsRepository } from "@/domain/forum/application/repositories/answer-attachments-repository";
 import { QuestionsRepository } from "@/domain/forum/application/repositories/question-repository";
 import { Question } from "@/domain/forum/enterprise/entities/question";
 import { Injectable } from "@nestjs/common";
+import { PrismaService } from "../prisma.service";
+import { AnswerAttachment } from "@/domain/forum/enterprise/entities/answer-attachment";
+import { PrismaAnswerAttachmentMapper } from "../mappers/prisma-answer-attachment-mapper";
 
 @Injectable()
-export class PrismaAnswerAttachmentsRepository implements QuestionsRepository{
+export class PrismaAnswerAttachmentsRepository implements AnswerAttachmentsRepository {
 
-    findById(id: string): Promise<Question | null> {
-        throw new Error("Method not implemented.");
+    constructor(private prisma: PrismaService) { }
+
+    async findManyByAnswerId(answerId: string): Promise<AnswerAttachment[]> {
+        const answerAttachments = await this.prisma.attachment.findMany({
+            where: {
+                answerId,
+            },
+        })
+
+        return answerAttachments.map(PrismaAnswerAttachmentMapper.toDomain);
     }
-    findBySlug(slug: string): Promise<Question | null> {
-        throw new Error("Method not implemented.");
-    }
-    findManyRecent(params: PaginationParams): Promise<Question[]> {
-        throw new Error("Method not implemented.");
-    }
-    create(question: Question): Promise<void> {
-        throw new Error("Method not implemented.");
-    }
-    save(question: Question): Promise<void> {
-        throw new Error("Method not implemented.");
-    }
-    delete(question: Question): Promise<void> {
-        throw new Error("Method not implemented.");
+
+    async deleteManyByAnswerId(answerId: string): Promise<void> {
+        await this.prisma.attachment.deleteMany({
+            where: {
+                answerId,
+            },
+        })
     }
 
 }
